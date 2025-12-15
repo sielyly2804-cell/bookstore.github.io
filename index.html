@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title> MY BOOKS STORE</title>
+    
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;900&family=Khmer&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        
+        .books {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .book {
+      background: rgb(247, 248, 249);
+      padding: 15px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      cursor: pointer;
+    }
+    
+    .book img {
+      border: #0c1318;
+            width: 40%;
+            height: 500px; 
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.4s;
+    }
+    .book h3 {
+      margin: 10px 0 5px;
+    }
+    .price {
+      color: #751d0d;
+      font-weight: bold;
+    }
+    button {
+        padding: 12px 25px;
+            font-size: 16px;
+            background-color: var(--color-accent);
+            color: var(--color-text-dark);
+            border: none;
+            border-radius: 30px; 
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            font-weight: bold;
+            
+     
+    }
+    button:hover {
+      background:#7d4388;
+
+          
+    }
+        :root {
+            --color-primary: #171746;   /* Deep Coffee Brown */
+            --color-secondary: #79c0f9; /* Medium Mocha */
+            --color-accent: #3c9dc1;    /* Warm Gold/Amber */
+            --color-background: #f6fafc; /* Off-White/Cream */
+            --color-text-dark: #2c485e; /* Dark Brown for body text */
+            --color-price: #791b0c;     /* Blue for price */
+        }
+        
+        * { 
+            box-sizing: border-box; 
+        }
+
+        body {
+            font-family: 'Nunito', 'Khmer', Arial, sans-serif;
+            background: var(--color-background);
+            padding: 0;
+            margin: 0;
+            color: var(--color-text-dark);
+            line-height: 1.6;
+        }
+
+        section, footer {
+            padding: 30px 60px;
+        }
+     
+        .main-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 60px 10px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: sticky; 
+            top: 0;
+            z-index: 100;
+        }
+
+        /* Logo Area */
+        .header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+         
+        .header-logo-center {
+            height: 150px; 
+            width: auto;
+            border-radius: 50%;
+            border: 5px solid var(--color-primary);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-text {
+            font-size: 55px; 
+            color: var(--color-primary); 
+            margin: 10px 0 15px 0;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--color-text-dark);
+            font-weight: 700;
+            padding: 10px 25px;
+            margin: 0 5px;
+            transition: color 0.3s, border-bottom 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--color-primary);
+            border-bottom: 3px solid var(--color-primary);
+        }
+        
+        /* Floating Cart Button */
+        .header-cart {
+            position: fixed;
+            top: 100px; 
+            right: 20px;
+            z-index: 101;
+        }
+        .cart-button-section {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: var(--color-accent);
+            color: var(--color-text-dark);
+            border: none;
+            border-radius: 30px; 
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            font-weight: bold;
+        }
+        .cart-button-section:hover {
+            background-color: #7f64ce;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(102, 149, 228, 0.2);
+        }
+        .cart-button-section:active { /* Added active state for better UI feedback */
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .cart-button-section i {
+            margin-right: 8px;
+        }
+
+
+        /* --- Hero Section --- */
+        .hero-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--color-background) 0%, #f4e9e5 100%);
+            border-bottom: 1px solid #ddd;
+        }
+
+        .hero-content h2 {
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            font-size: 42px;
+            font-weight: 900;
+        }
+        .hero-content p {
+            max-width: 800px;
+            margin: 0 auto 10px;
+            font-size: 18px;
+            color: var(--color-secondary);
+        }
+
+        /* --- Products Section and Gallery --- */
+        .products-section {
+            text-align: center;
+            padding-top: 50px;
+        }
+        .products-section h2 {
+            color: var(--color-primary);
+            font-size: 38px;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .title { /* The "Menu" subtitle */
+            color: var(--color-secondary);
+            font-size: 28px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 300;
+        }
+        .book-gallery {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 pics per row */
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .book-gallery img {
+    width: 100%;
+    border-radius: 10px;
+    }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px;
+            padding: 0 40px;
+        }
+
+        /* Card Styling */
+        .card {
+            background: white;
+            border-radius: 12px; 
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+            transition: transform 0.4s cubic-bezier(.2,.9,.3,1), box-shadow 0.4s;
+            cursor: pointer; 
+            border: 1px solid #eee;
+        }
+
+        .card:hover{
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Image container */
+        
+
+        .card:hover .img {
+            transform: scale(1.03); 
+            box-shadow: #0c1318;
+        }
+
+        /* Overlay title */
+        .overlay .text {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 10px); 
+            bottom: 15px;
+            color: white;
+            border: 2px solid var(--color-accent);
+            padding: 6px 18px;
+            border-radius: 5px;
+            font-weight: 700;
+            background: rgba(0,0,0,0.6); 
+            transition: transform 0.3s, opacity 0.3s;
+            opacity: 1;
+            z-index: 5;
+            font-size: 18px;
+        }
+        
+        /* Info Bar */
+        .info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center; 
+            padding: 15px;
+            text-align: left;
+        }
+
+        .product-name {
+            color: var(--color-primary);
+            font-size: 24px;
+            margin: 0 0 5px 0;
+            width: 100%;
+            font-weight: 900;
+        }
+        .product-price {
+            font-weight: 700;
+            color: var(--color-price);
+            font-size: 18px;
+        }
+
+        .order-link {
+            color: white;
+            background-color: var(--color-primary);
+            padding: 8px 15px;
+            border-radius: 20px; 
+            font-size: 14px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        .order-link:hover {
+            background-color: #25b7e8;
+            transform: scale(1.05);
+        }
+        .order-link:active { /* Added active state for better UI feedback */
+            transform: scale(0.95); 
+            background-color: #3db2c2;
+        }
+
+        /* --- About and Contact Sections --- */
+        .about-section, .contact-section {
+            background-color: white;
+            margin-top: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(26, 49, 132, 0.05);
+            text-align: left;
+        }
+
+        .about-section h2, .contact-section h2 {
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            font-size: 32px;
+        }
+        
+        /* --- Footer --- */
+        .main-footer {
+            background-color: var(--color-primary);
+            color: #fcf8f6;
+            text-align: center;
+            margin-top: 50px;
+            padding: 25px 60px;
+        }
+
+        .main-footer a {
+            color: var(--color-accent);
+            text-decoration: none;
+            margin: 0 8px;
+            transition: color 0.3s;
+        }
+        .main-footer a:hover {
+            color: white;
+        }
+        
+        /* --- Blink Effect CSS --- */
+        @keyframes blink-animation {
+            0%, 100% { 
+                opacity: 1; 
+                transform: translate(-50%, -5px) scale(1.05); 
+                background: var(--color-primary); 
+            }
+            50% { 
+                opacity: 0.8; 
+                transform: translate(-50%, 0px) scale(1); 
+                background: rgba(227, 198, 185, 0.6);
+            }
+        }
+
+        .card .text.active-blink {
+            animation: blink-animation 1s infinite alternate; 
+            transform: translate(-50%, -5px); 
+            opacity: 1; 
+            border-color: var(--color-accent);
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            section, footer, .main-header {
+                padding: 20px;
+            }
+            .logo-text { 
+                font-size: 45px; 
+            }
+            .nav-links li a {
+                padding: 10px 15px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-header {
+                padding-bottom: 5px;
+            }
+            .logo-text { 
+                font-size: 35px; 
+            }
+            .header-logo-center {
+                height: 100px;
+            }
+        
+            .nav-links { 
+                flex-wrap: wrap;
+                justify-content: space-between;
+                width: 100%;
+            }
+            .nav-links li {
+                width: 48%; 
+                margin-bottom: 10px;
+            }
+            .nav-links li a {
+                display: block;
+                text-align: center;
+                border: 1px solid #eee;
+            }
+            .header-cart {
+                position: fixed;
+                top: auto;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-center">
+            <div class="logo-top-container">
+                <img src="images/logo.jpg" alt="Logo" class="header-logo-center">
+            </div>
+            
+            <h1 class="logo-text">MY BOOKS STORE</h1>
+            
+            <nav class="centered-nav">
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">ទំព័រ​ដើម</a></li>
+                    <li><a href="#products">សៀវភៅ</a></li>
+                    <li><a href="#about">អំពី​យើង</a></li>
+                    <li><a href="#contact">ទំនាក់ទំនង</a></li>
+                    <li><a href="#address">អាសយដ្ឋាន</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-cart">
+             <button class="cart-button-section"><i class="fas fa-shopping-cart"></i> រទេះ</button>
+        </div>
+    </header>
+
+    <section id="products" class="products-section">
+        <h2>សៀវភៅជាច្រើនប្រភេទ</h2>
+        <h3 class="title">អានដើម្បីខ្លួនឯង​ អានដើម្បីគ្រួសារ អានដើម្បីប្រទេសជាតិ</h3>
+        
+    </section>
+
+   
+    <section id="categories" >
+         <div class="book">
+          <img src="images/selflove.jpg" alt="images/lovely runner.webp">
+         <h3>"SELF-LOVE AND MOTIVATION"</h3>
+        <p class="price">Price: "50000 KHR" "$12.5", </p>
+        <button>BUY NOW</button>
+        </div>
+
+        <div class="book">
+          <img src="images/poems.jpg" alt="images/poems.jpg">
+         <h3>" MAIN POEMS"</h3>
+        <p class="price">Price: ""40000 KHR"" "$10.00", </p>
+        <button>BUY NOW</button>
+        </div>
+
+         <div class="book">
+          <img src="images/theforestjamierobe.jpg" alt="images/theforestjamierobe.jpg">
+         <h3>" BOOK FOR KIDS"</h3>
+        <p class="price">Price: "30000KHR" "$7.50", </p>
+        <button>BUY NOW</button>
+        </div>
+
+        <div class="book">
+          <img src="images/scapes.jpg" alt="images/scapes.jpg">
+         <h3>" CITY SCAPES"</h3>
+        <p class="price">Price: "22000KHR" "$5.50", </p>
+        <button>BUY NOW</button>
+        </div>
+
+         <div class="book">
+          <img src="images/love.jpg" alt="images/love.jpg">
+         <h3>"WHISPERS OF HEART"</h3>
+        <p class="price">Price: "32000KHR" "$8.00", </p>
+        <button>BUY NOW</button>
+        </div>
+
+        <div class="book">
+          <img src="images/innovation.jpg" alt="images/innovation.jpg">
+         <h3>"BUSINESS BOOK"</h3>
+        <p class="price">Price: "80000KHR" "$20.00", </p>
+        <button>BUY NOW</button>
+        </div>
+
+        <div class="book">
+          <img src="images/cookbook.jpg" alt="images/cookbook.jpg">
+         <h3>"COOK BOOK"</h3>
+        <p class="price">Price: "60000KHR" "$15.00", </p>
+        <button>BUY NOW</button>
+        </div>
+
+        <div class="book">
+          <img src="images/hispersofthedawn.jpg" alt="images/hispersofthedawn.jpg">
+         <h3>"ADVANTURE"</h3>
+        <p class="price">Price: "20000KHR" "$5.00", </p>
+        <button>BUY NOW</button>
+        </div>
+
+        <div class="book">
+          <img src="images/ancient.jpg" alt="images/ancient.jpg">
+         <h3>"ADVANTURE"</h3>
+        <p class="price">Price: "10000KHR" "$2.50", </p>
+        <button>BUY NOW</button>
+        </div>
+
+         <section id="about" class="about-section">
+        <h2>MY BOOKS STORE</h2>
+        <p><strong>យើងខ្ញុំបាននាំយកសៀវភៅដែលមានគុណភាព​និង​មានភាពពេញនិយមក្នុងគោលបំណងពង្រឹងនូវ​ការអាន និងចំណេះដឹងថ្មីសម្រាប់ប្រជាជនកម្ពុជា​ ទទួលស្វាគមន៏ដោយស្នាមញញឹម សម្រាប់អតិថិជនជាទីស្រឡាញ់។</strong> </p>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2>ទំនាក់ទំនង</h2>
+        <p>លេខទូរសព្ទ : <strong> 011 354 866 </strong> </p>
+        <p>Telegram  : <strong>  097 238 0636</strong> </p>
+        <p>អាសយដ្ឋាន : <strong> ខេត្តបាត់ដំបង </strong></p>
+    </section>
+
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>&copy; 2025  WELCOME TO MY BOOKS STORE។</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/yourpagename" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a> | 
+                <a href="https://www.instagram.com/youraccountname" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>
